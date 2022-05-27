@@ -5,11 +5,13 @@ import {  AppBar,
         Box, 
         Button, 
         Tabs, 
-        Tab } from '@mui/material'
+        Tab, 
+} from '@mui/material';
 import { Link } from 'react-router-dom';
-
-
+import { useSelector } from "react-redux";
 const Header = () => {
+  const isLoggedIn = useSelector((state) => state.isLoggedIn); 
+
   const [value, setValue] = useState() ;
   return (
     <AppBar 
@@ -21,7 +23,7 @@ const Header = () => {
     >
       <Toolbar>
         <Typography variant="h4">ZomBlog</Typography>
-        <Box display="flex" marginLeft={"auto"} marginRight="auto">
+        { isLoggedIn && <Box display="flex" marginLeft={"auto"} marginRight="auto">
         <Tabs
            textColor="inherit"
            value={value} 
@@ -32,9 +34,9 @@ const Header = () => {
           </Tabs>
 
 
-        </Box>
+        </Box>}
         <Box display="flex" marginLeft="auto" >
-          <Button 
+        { !isLoggedIn && <> <Button 
           LinkComponent={Link}
           to="/auth"
           variant="contained" 
@@ -51,8 +53,8 @@ const Header = () => {
           color="secondary"
           >
             Signup
-          </Button>
-          <Button 
+          </Button> </>}
+         { isLoggedIn && <Button 
           LinkComponent={Link}
           to="/auth"
           variant="contained" 
@@ -60,7 +62,7 @@ const Header = () => {
           color="secondary"
           >
             Logout
-          </Button>
+          </Button> }
         </Box>
       </Toolbar>
 
