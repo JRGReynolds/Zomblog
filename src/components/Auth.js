@@ -12,11 +12,15 @@ const Auth = () => {
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name] : e.target.value
-    })) 
+    }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(inputs)
   }
   return (
     <div>
-       <form>
+       <form onSubmit={handleSubmit}>
         <Box 
         maxWidth={400}
         display="flex" 
@@ -47,12 +51,16 @@ const Auth = () => {
           placeholder="Password" 
           margin="normal" 
           />
-          <Button
+          <Button type='submit'
           variant="contained" 
           sx= {{borderRadius: 3, marginTop: 3}} 
           color="secondary"
-          > Submit</Button>
-          <Button onClick={()=>setIsSignup(!isSignup)} sx={{ borderRadius: 3, marginTop: 3 }}
+
+          > 
+          Submit
+          </Button>
+          <Button onClick={()=>setIsSignup(!isSignup)} 
+          sx={{ borderRadius: 3, marginTop: 3 }}
           >
              {isSignup ? "Login" : "Signup"}
           </Button>
