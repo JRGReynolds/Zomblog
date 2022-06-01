@@ -8,10 +8,11 @@ import {  AppBar,
         Tab, 
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from '../store';
 const Header = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn); 
-
+const dispatch = useDispatch();
   const [value, setValue] = useState() ;
   return (
     <AppBar 
@@ -30,13 +31,15 @@ const Header = () => {
            onChange={(e,val) => setValue(val)}
            >
             <Tab LinkComponent={Link} to="/blogs" label="All Blogs"/>
-            <Tab LinkComponent={Link} to="myBlogs" label="My Blogs"/>
+            <Tab LinkComponent={Link} to="/myBlogs" label="My Blogs"/>
+            <Tab LinkComponent={Link} to="/blogs/add" label="Add Blog"/>
           </Tabs>
 
 
         </Box>}
         <Box display="flex" marginLeft="auto" >
-        { !isLoggedIn && <> <Button 
+        { !isLoggedIn && <> 
+        <Button 
           LinkComponent={Link}
           to="/auth"
           variant="contained" 
@@ -53,8 +56,12 @@ const Header = () => {
           color="secondary"
           >
             Signup
-          </Button> </>}
-         { isLoggedIn && <Button 
+          </Button> 
+          </>
+          }
+         { isLoggedIn && 
+         <Button 
+         onClick={()=>dispatch(authActions.logout())}
           LinkComponent={Link}
           to="/auth"
           variant="contained" 
