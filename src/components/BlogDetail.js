@@ -28,13 +28,23 @@ const BlogDetail = () => {
   useEffect(() => {
     fetchDetails().then(data => {
       setBlog(data.blog)
-      setInputs({title:data.blog.title,description: data.blog.description,imageURL: data.blog.image })
+      setInputs({title:data.blog.title,description: data.blog.description })
     });
   },[id]);
+  const sendRequest = async() => {
+    const res = await axios.put(`http://localhost:5002/api/blog/update/${id}`, {
+    title: inputs.title,
+    description: inputs.description
+  }).catch(err=>console.log(err));
+
+  const data = await res.data;
+  return data;
+}
   console.log(blog);
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     console.log(inputs);
+    sendRequest().then(data=>console.log(data));
   }
 
   return <div>  
@@ -64,8 +74,7 @@ const BlogDetail = () => {
  <TextField name="title" onChange={handleChange} value={inputs.title} margin="normal" variant="outlined" />
  <InputLabel sx={labelStyles}>Description</InputLabel>
  <TextField name="description" onChange={handleChange} value={inputs.description} margin="normal" variant="outlined" />
- <InputLabel sx={labelStyles}>ImageURL</InputLabel>
- <TextField name="imageURL" onChange={handleChange} value={inputs.imageURL} margin="normal" variant="outlined" />
+
  <Button sx={{mt:2, borderRadius:4}} variant="contained" color="secondary" type="submit">Submit</Button>
  </Box>
  </form>}</div>;
