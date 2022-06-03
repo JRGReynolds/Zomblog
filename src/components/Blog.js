@@ -3,11 +3,21 @@ import React from 'react';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const Blog = ({title,description,imageURL,userName, isUser, id}) => {
+const Blog = ({title,description,imageURL,userName, isUser, id }) => {
   const navigate = useNavigate();
  const handleEdit = () => {
    navigate(`/myBlogs/${id}` );
+ };
+ const deleteRequest =  async () => {
+   const res = axios.delete(`http://localhost:5002/api/blog/${id}`).catch(err=>console.log())
+   const data = await res.data;
+   return data
+ };
+ const handleDelete = () => {
+   deleteRequest().then((data)=>console.log(data));
+    
  }
   return (
     <div>  
@@ -28,7 +38,7 @@ const Blog = ({title,description,imageURL,userName, isUser, id}) => {
     {isUser && (
       <Box display ='flex'>
         <IconButton onClick={handleEdit} sx={{ marginLeft: "auto "}}><ModeEditOutlineIcon/></IconButton>
-        <IconButton ><DeleteForeverIcon/></IconButton>
+        <IconButton onClick={handleDelete} ><DeleteForeverIcon/></IconButton>
       </Box>
     )}
     <CardHeader
