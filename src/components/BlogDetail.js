@@ -3,8 +3,11 @@ import { Box } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 
 const BlogDetail = () => {
+  const navigate = useNavigate()
   const [inputs, setInputs] = useState({
 
   });
@@ -44,7 +47,7 @@ const BlogDetail = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
-    sendRequest().then(data=>console.log(data));
+    sendRequest().then(data=>console.log(data)).then(()=>navigate("/blogs"));
   }
 
   return <div>  

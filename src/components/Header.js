@@ -13,10 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from '../store';
 
 
-
-<script src="https://kit.fontawesome.com/b1bbd7b33a.js" crossorigin="anonymous"></script>
-
-
 const Header = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn); 
 const dispatch = useDispatch();

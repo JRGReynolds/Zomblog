@@ -16,8 +16,10 @@ const Blog = ({title,description,imageURL,userName, isUser, id }) => {
    return data
  };
  const handleDelete = () => {
-   deleteRequest().then((data)=>console.log(data));
+   deleteRequest().then(()=>navigate("/")).then(()=>navigate("/blogs"));
+   ;
     
+   
  }
   return (
     <div>  
@@ -37,26 +39,32 @@ const Blog = ({title,description,imageURL,userName, isUser, id }) => {
    
     {isUser && (
       <Box display ='flex'>
-        <IconButton onClick={handleEdit} sx={{ marginLeft: "auto "}}><ModeEditOutlineIcon/></IconButton>
-        <IconButton onClick={handleDelete} ><DeleteForeverIcon/></IconButton>
+        <IconButton onClick={handleEdit} sx={{ marginLeft: "auto "}}>
+          <ModeEditOutlineIcon color="warning"/></IconButton>
+        <IconButton onClick={handleDelete} >
+          <DeleteForeverIcon color="error"/></IconButton>
       </Box>
     )}
     <CardHeader
       avatar={
-        <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
+        <Avatar sx={{ bgcolor: "purple" }} aria-label="recipe">
           {userName.charAt(0)}
         </Avatar>
       }
       title={title}
-      subheader="September 14, 2016"
+      subheader="June 6th 2022"
     />
     <CardMedia
       component="img"
       height="194"
       image={imageURL}
-      alt="Paella dish"
+      alt="image"
     />
+    <hr />
+    <br/>
     <CardContent>
+    <hr />
+    <br/>
       <Typography variant="body2" color="text.secondary">
     <b>{userName}</b> {":"} {description}
       </Typography>
