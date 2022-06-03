@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Blog from './Blog';
 
 const UserBlogs = () => {
-  const [blogs, setBlogs] = useState()
+  const [user, setUser] = useState()
   const id = localStorage.getItem("userId");
   const sendRequest = async () => {
     const res = await axios.get(`http://localhost:5002/api/blog/user/${id}`).catch(err=>console.log(err))
@@ -11,18 +11,24 @@ const UserBlogs = () => {
     return data;
   };
  useEffect(() => { 
- sendRequest().then((data) => setBlogs(data.blogs.blogs));
+ sendRequest().then((data) => setUser(data.user));
   }, []);
-  console.log(blogs);
-  return <div> {blogs && 
-    blogs.map((blog, index) => (
-    <Blog 
+  console.log(user);
+  return (
+  <div> 
+    {" "}
+    {user && 
+    user.blogs && 
+    user.blogs.map((blog, index) => (
+    <Blog key={index}
     title={blog.title} 
     description={blog.description} 
     imageURL={blog.image} 
-    userName={blog.user.name} 
-    />))} </div>;
+    userName={user.name} 
+    />
+    ))} 
+    </div>
 
-};
-
+  );
+    };
 export default UserBlogs
