@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {  AppBar, 
         Typography, 
@@ -10,6 +11,12 @@ import {  AppBar,
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from '../store';
+
+
+
+<script src="https://kit.fontawesome.com/b1bbd7b33a.js" crossorigin="anonymous"></script>
+
+
 const Header = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn); 
 const dispatch = useDispatch();
@@ -23,7 +30,7 @@ const dispatch = useDispatch();
     }}
     >
       <Toolbar>
-        <Typography variant="h4">ZomBlog</Typography>
+        <Typography variant="h4">ZomBlog </Typography>
         { isLoggedIn && <Box display="flex" marginLeft={"auto"} marginRight="auto">
         <Tabs
            textColor="inherit"
