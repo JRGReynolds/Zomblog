@@ -9,9 +9,9 @@ const Auth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
-    title: "",
-    description: "",
-    imageURL: "",
+    name: "",
+    email: "",
+    password: "",
   });
   const [isSignup, setIsSignup] = useState(false);
   const handleChange = (e) => {
